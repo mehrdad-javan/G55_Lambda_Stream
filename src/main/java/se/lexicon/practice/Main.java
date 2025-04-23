@@ -22,15 +22,15 @@ public class Main {
 
         // Print out all Products that have stock value of 0.
         Conditional stockValueZero = product -> product.getStock() == 0;
-        Action actionPrint = product -> System.out.println(product.toString());
+        Action actionPrint = product -> System.out.println(product);
         process(productList, stockValueZero, actionPrint);
 
         System.out.println("-------------------");
 
         // Print out the productName of all the Products that starts with B.
-        Conditional conditionalStartsWithB = product -> product.getProductName().startsWith("B");
-        //Action actionPrintName = product -> System.out.println(product.getProductName());
-        process(productList, conditionalStartsWithB, actionPrint);
+        process(productList,
+                product -> product.getProductName().startsWith("B"),
+                product -> System.out.println(product.getProductName()));
 
         // Print out all Products that have price above 100 AND lower than 150
         // todo: needs completion
@@ -39,9 +39,9 @@ public class Main {
 
     }
 
-    public static void process(List<Product> productList, Conditional conditional, Action action){
-        for(Product product : productList){
-            if(conditional.test(product)){
+    public static void process(List<Product> productList, Conditional conditional, Action action) {
+        for (Product product : productList) {
+            if (conditional.test(product)) {
                 action.execute(product);
             }
         }
